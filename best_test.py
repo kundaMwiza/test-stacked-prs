@@ -12,3 +12,7 @@ def input_b() -> np.ndarray:
 def test_add(input_a, input_b) -> None:
     result = input_a + input_b
     assert (result != 0 ).all()
+
+def test_sub(input_a, input_b) -> None:
+    result = input_a - input_b
+    assert (result != 0).all()
