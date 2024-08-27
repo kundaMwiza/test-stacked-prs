@@ -35,7 +35,8 @@ jobs:
       - name: Generate path glob
         shell: bash
         run: |
-          files=$(echo "${{ join(fromJson('{ "wheel": "best*", tests: "random*" }').*, ' ') }}")
+          set -f
+          files=${{ join(fromJson('{ "wheel": "best*", tests: "random*" }').*) }}
           # MY_STRING=$files
           # MY_STRING=$(cat << EOF
           # $files
@@ -49,7 +50,7 @@ jobs:
           # )
           echo "MY_STRING<<EOF" >> $GITHUB_ENV
           echo "MY_STRING<<EOF" >> file.txt
-          for file in ${files}; do
+          for file in ${files//,/ }; do
             echo "$file"
           done
           while IFS= read -r line ; do
