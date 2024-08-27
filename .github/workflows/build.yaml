@@ -37,8 +37,9 @@ jobs:
         shell: bash
         run: |
           files=${{ fromJson('{ 32: "i386", 64: "x86_64" }').* }}
-          echo "${files[@]}" > path.txt
-          echo $(cat path.txt)
+          for file in "${files[@]}"; do
+            echo "$file"
+          done
       - name: Upload artifacts to GitHub
         uses: actions/upload-artifact@v4
         with:
