@@ -41,6 +41,7 @@ jobs:
             echo "$file" >> path.txt
           done
       - name: experiment
+        id: my_string
         run: |
             MY_STRING=$(cat << EOF
           best_*
@@ -50,7 +51,6 @@ jobs:
           echo "MY_STRING<<EOF" >> $GITHUB_ENV
           echo "$MY_STRING" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
-        id: my_string
       - name: display string
         run: |
           echo "The string is: ${{ env.MY_STRING }}"
