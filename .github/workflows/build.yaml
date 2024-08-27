@@ -37,56 +37,17 @@ jobs:
         shell: bash
         run: |
           set -f
-          files=${{ join(fromJson('{ "wheel": "best*", tests: "random*" }').*) }}
-          new_files="${{ join(fromJson('{ "wheel": "best*", tests: "random*" }').*, '\n') }}"
-          echo "MY_NEW_STRING<<EOF" >> $GITHUB_OUTPUT
-          echo "MY_NEW_STRING<<EOF" >> some_file.txt
-          echo "$new_files" >> $GITHUB_OUTPUT
-          echo "$new_files" >> some_file.txt
+          artifact_globs=${{ join(fromJson('{ "wheel": "best*", tests: "random*" }').*) }}
+          echo "ARTIFACT_GLOB_STR<<EOF" >> $GITHUB_OUTPUT
+          for glob in ${artifact_globs//,/ }; do echo $glob >> $GITHUB_OUTPUT; done
           echo "EOF" >> $GITHUB_OUTPUT
-          echo "EOF" >> some_file.txt
-
-          cat some_file.txt
-          # MY_STRING=$files
-          # MY_STRING=$(cat << EOF
-          # $files
-          # EOF
-          # )
-          # # MY_STRING=$(cat << EOF
-          # best*
-          # test*
-          # random*
-          # EOF
-          # )
-          echo "MY_STRING<<EOF" >> $GITHUB_OUTPUT
-          echo "MY_STRING<<EOF" >> file.txt
-          for line in ${files//,/ }; do
-             echo $line >> $GITHUB_OUTPUT;
-             echo $line >> file.txt;
-          done
-          #while IFS= read -r line ; do
-          #  echo $line;
-          # echo $line >> $GITHUB_OUTPUT;
-          # echo $line >> file.txt;
-          #done <<< "$files"
-          # for file in "${files[@]}"; do
-          #   echo "$file" >> $GITHUB_OUTPUT
-          #   echo "$file" >> file.txt
-          # done
-          # echo "$MY_STRING" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-          echo "EOF" >> file.txt
-          cat file.txt
-          # for file in "${files[@]}"; do
-            # echo "$file" >> path.txt
-          # done
       - name: Upload artifacts to GitHub
         uses: actions/upload-artifact@v4
         with:
           name: test
           if-no-files-found: error
           overwrite: true
-          path: ${{ steps.get-artifact-str.outputs.MY_NEW_STRING }}
+          path: ${{ steps.get-artifact-str.outputs.ARTIFACT_GLOB_STR }}
           # path: | ${{ format('\n{0}', join(fromJson('{ 32: "best_*", 64: "test_*" }').*, '\n')) }}
 
           #  *est_test.py
