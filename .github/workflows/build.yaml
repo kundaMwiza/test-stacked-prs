@@ -33,6 +33,7 @@ jobs:
         run: |
          echo $(pwd)
       - name: Generate path glob
+        id: get-artifact-str
         shell: bash
         run: |
           set -f
@@ -76,7 +77,7 @@ jobs:
           name: test
           if-no-files-found: error
           overwrite: true
-          path: ${{ env.MY_STRING }}
+          path: ${{ steps.get-artifact-str.outputs.MY-STRING }}
           # path: | ${{ format('\n{0}', join(fromJson('{ 32: "best_*", 64: "test_*" }').*, '\n')) }}
 
           #  *est_test.py
