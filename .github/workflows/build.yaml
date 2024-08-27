@@ -12,6 +12,7 @@ concurrency:
 env:
   first: "value"
   second: "another value"
+
 jobs:
   pr_build:
     runs-on: ubuntu-latest
@@ -36,7 +37,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test
-          path: ${{ join(fromJSON(env.globs).*, '\n') }}
+          path: ${{ join(fromJSON(env).*, '\n') }}
           #  *est_test.py
           #  test_match_case*
           if-no-files-found: error
