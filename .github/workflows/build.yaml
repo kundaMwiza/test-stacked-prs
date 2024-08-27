@@ -37,8 +37,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test
-          path: ${{ fromJSON('["hello", "world"]') }}
-          #  *est_test.py
-          #  test_match_case*
           if-no-files-found: error
           overwrite: true
+          path: |
+           ${{ fromJson('{ 32: "i386", 64: "x86_64" }').* }}
+          #  *est_test.py
+          #  test_match_case*
