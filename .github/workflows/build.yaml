@@ -32,6 +32,7 @@ jobs:
         with:
           name: test
           path: |
-           '*est_test.py\ntest_match_case*'
+           *est_test.py
+           test_match_case*
           if-no-files-found: error
           overwrite: true
