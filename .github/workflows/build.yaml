@@ -37,9 +37,10 @@ jobs:
         shell: bash
         run: |
           files=${{ join(fromJson('{ 32: "i386", 64: "x86_64" }').*, '\n') }}
-          for file in "${files[@]}"; do
-            echo "$file"
-          done
+          echo $files
+          # for file in "${files[@]}"; do
+          #   echo "$file"
+          # done
       - name: Upload artifacts to GitHub
         uses: actions/upload-artifact@v4
         with:
