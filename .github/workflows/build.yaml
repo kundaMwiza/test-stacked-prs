@@ -36,8 +36,8 @@ jobs:
       - name: Generate path glob
         shell: bash
         run: |
-          files=${{ join(fromJson('{ 32: "i386", 64: "x86_64" }').*, '\n') }}
-          echo $files
+          files=(${{ join(fromJson('{ 32: "i386", 64: "x86_64" }').*, ' ') }})
+          echo "${files[@]}"
           # for file in "${files[@]}"; do
           #   echo "$file"
           # done
