@@ -10,9 +10,8 @@ concurrency:
   cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 env:
-  globs:
-    first: "value"
-    second: "another value"
+  first: "value"
+  second: "another value"
 jobs:
   pr_build:
     runs-on: ubuntu-latest
