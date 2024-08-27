@@ -48,7 +48,6 @@ jobs:
           # EOF
           # )
           echo "MY_STRING<<EOF" >> $GITHUB_ENV
-          echo "\n" >> $GITHUB_ENV
           for file in "${files[@]}"; do
             echo "$file" >> $GITHUB_ENV
           done
