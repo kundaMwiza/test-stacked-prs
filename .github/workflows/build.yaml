@@ -48,14 +48,20 @@ jobs:
           # EOF
           # )
           echo "MY_STRING<<EOF" >> $GITHUB_ENV
+          echo "MY_STRING<<EOF" >> file.txt
           while IFS= read -r line ; do
-            echo $line; echo $line >> $GITHUB_ENV;
+            echo $line;
+           echo $line >> $GITHUB_ENV;
+           echo $line >> file.txt;
           done <<< "$files"
           # for file in "${files[@]}"; do
           #   echo "$file" >> $GITHUB_ENV
+          #   echo "$file" >> file.txt
           # done
           # echo "$MY_STRING" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
+          echo "EOF" >> file.txt
+          cat file.txt
           # for file in "${files[@]}"; do
             # echo "$file" >> path.txt
           # done
