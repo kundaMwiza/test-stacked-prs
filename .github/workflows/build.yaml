@@ -32,27 +32,21 @@ jobs:
       - name: Where are we
         run: |
          echo $(pwd)
-      # - name: Generate path glob
-      #   shell: bash
-      #   run: |
-      #     files=${{ join(fromJson('{ 32: "i386", 64: "x86_64" }').*, ' ') }}
-      #     for file in "${files[@]}"; do
-      #       echo "$file" >> path.txt
-      #     done
-      - name: experiment
-        id: my_string
+      - name: Generate path glob
+        shell: bash
         run: |
-            MY_STRING=$(cat << EOF
-          best_*
+          MY_STRING=$(cat << EOF
+          best*
           test*
           EOF
           )
           echo "MY_STRING<<EOF" >> $GITHUB_ENV
           echo "$MY_STRING" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
-      - name: display string
-        run: |
-          echo "The string is: ${{ env.MY_STRING }}"
+          # files=${{ join(fromJson('{ 32: "i386", 64: "x86_64" }').*, ' ') }}
+          # for file in "${files[@]}"; do
+            # echo "$file" >> path.txt
+          # done
       - name: Upload artifacts to GitHub
         uses: actions/upload-artifact@v4
         with:
@@ -60,8 +54,7 @@ jobs:
           if-no-files-found: error
           overwrite: true
           path: ${{ env.MY_STRING }}
-          # path: |
-            # ${{ join(fromJson('{ 32: "best_*", 64: "test_*" }').*, '\\n') }}
+          # path: | ${{ format('\n{0}', join(fromJson('{ 32: "best_*", 64: "test_*" }').*, '\n')) }}
 
           #  *est_test.py
           #  test_match_case*
