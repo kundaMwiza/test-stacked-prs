@@ -32,14 +32,13 @@ jobs:
       - name: Where are we
         run: |
          echo $(pwd)
-
-      - name: Generate path glob
-        shell: bash
-        run: |
-          files=${{ join(fromJson('{ 32: "i386", 64: "x86_64" }').*, ' ') }}
-          for file in "${files[@]}"; do
-            echo "$file" >> path.txt
-          done
+      # - name: Generate path glob
+      #   shell: bash
+      #   run: |
+      #     files=${{ join(fromJson('{ 32: "i386", 64: "x86_64" }').*, ' ') }}
+      #     for file in "${files[@]}"; do
+      #       echo "$file" >> path.txt
+      #     done
       - name: experiment
         id: my_string
         run: |
