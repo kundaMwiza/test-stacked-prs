@@ -36,18 +36,17 @@ jobs:
       - name: Generate path glob
         shell: bash
         run: |
-          files=(${{ join(fromJson('{ 32: "i386", 64: "x86_64" }').*, ' ') }})
-          echo "${files[@]}"
-          # for file in "${files[@]}"; do
-          #   echo "$file"
-          # done
+          files=${{ join(fromJson('{ 32: "i386", 64: "x86_64" }').*, ' ') }}
+          for file in "${files[@]}"; do
+            echo "$file" >> path.txt
+          done
       - name: Upload artifacts to GitHub
         uses: actions/upload-artifact@v4
         with:
           name: test
           if-no-files-found: error
           overwrite: true
-          path: '*est_test.py'
+          path: path.txt
           #  ${{ fromJson('{ 32: "i386", 64: "x86_64" }').* }}
           #  *est_test.py
           #  test_match_case*
