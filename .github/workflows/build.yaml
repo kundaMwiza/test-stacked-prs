@@ -33,13 +33,17 @@ jobs:
         run: |
          echo $(pwd)
 
+      - name: Generate path glob
+        run: |
+          files=${{ fromJson('{ 32: "i386", 64: "x86_64" }').* }}
+          echo "${files[@]}"
       - name: Upload artifacts to GitHub
         uses: actions/upload-artifact@v4
         with:
           name: test
           if-no-files-found: error
           overwrite: true
-          path: |
-           ${{ fromJson('{ 32: "i386", 64: "x86_64" }').* }}
+          path: '*est_test.py'
+          #  ${{ fromJson('{ 32: "i386", 64: "x86_64" }').* }}
           #  *est_test.py
           #  test_match_case*
