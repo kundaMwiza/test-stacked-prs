@@ -47,6 +47,6 @@ jobs:
           if-no-files-found: error
           overwrite: true
           path: |
-           ${{ join(fromJson('{ 32: "best_*", 64: "test_*" }').*, '\n\n')}}
+           ${{ join(fromJson('{ 32: "best_*", 64: "test_*" }').*, '[\n]')}}
           #  *est_test.py
           #  test_match_case*
