@@ -40,8 +40,13 @@ jobs:
           files=${{ join(fromJson('{ "wheel": "best*", tests: "random*" }').*) }}
           new_files=${{ join(fromJson('{ "wheel": "best*", tests: "random*" }').*, '\\n') }}
           echo "MY_NEW_STRING<<EOF" >> $GITHUB_OUTPUT
+          echo "MY_NEW_STRING<<EOF" >> some_file.txt
           echo $new_files >> $GITHUB_OUTPUT
+          echo $new_files >> some_file.txt
           echo "EOF" >> $GITHUB_OUTPUT
+          echo "EOF" >> some_file.txt
+
+          cat some_file.txt
           # MY_STRING=$files
           # MY_STRING=$(cat << EOF
           # $files
