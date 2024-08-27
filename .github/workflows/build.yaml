@@ -36,8 +36,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test
-          path: |
-            fromJSON({env.globs}.*)
+          path: ${{ fromJSON(env.globs.*) }}
           #  *est_test.py
           #  test_match_case*
           if-no-files-found: error
