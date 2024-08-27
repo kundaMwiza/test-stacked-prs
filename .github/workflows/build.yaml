@@ -41,11 +41,11 @@ jobs:
             echo "$file" >> path.txt
           done
            - name: create string
+      - name: experiment
         run: |
-          MY_STRING=$(cat << EOF
-          first line
-          second line
-          third line
+            MY_STRING=$(cat << EOF
+          best_*
+          test*
           EOF
           )
           echo "MY_STRING<<EOF" >> $GITHUB_ENV
@@ -61,8 +61,9 @@ jobs:
           name: test
           if-no-files-found: error
           overwrite: true
-          path: |
-            ${{ join(fromJson('{ 32: "best_*", 64: "test_*" }').*, '\\n') }}
+          path: ${{ env.MY_STRING }}
+          # path: |
+            # ${{ join(fromJson('{ 32: "best_*", 64: "test_*" }').*, '\\n') }}
 
           #  *est_test.py
           #  test_match_case*
