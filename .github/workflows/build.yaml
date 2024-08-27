@@ -38,9 +38,9 @@ jobs:
         run: |
           set -f
           files=${{ join(fromJson('{ "wheel": "best*", tests: "random*" }').*) }}
-          files=${{ join(fromJson('{ "wheel": "best*", tests: "random*" }').*, '\n') }}
+          new_files=${{ join(fromJson('{ "wheel": "best*", tests: "random*" }').*, '\\n') }}
           echo "MY_NEW_STRING<<EOF" >> $GITHUB_OUTPUT
-          echo $files >> $GITHUB_OUTPUT
+          echo $new_files >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
           # MY_STRING=$files
           # MY_STRING=$(cat << EOF
