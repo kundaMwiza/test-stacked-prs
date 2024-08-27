@@ -35,7 +35,7 @@ jobs:
       - name: Generate path glob
         shell: bash
         run: |
-          files=$'${{ join(fromJson('{ "wheel": "best*", tests: "random*" }').*, '\n') }}
+          files=${{ join(fromJson('{ "wheel": "best*", tests: "random*" }').*, '\n') }}
           # MY_STRING=$files
           # MY_STRING=$(cat << EOF
           # $files
