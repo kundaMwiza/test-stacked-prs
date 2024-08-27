@@ -34,6 +34,7 @@ jobs:
          echo $(pwd)
 
       - name: Generate path glob
+        shell: bash
         run: |
           files=${{ fromJson('{ 32: "i386", 64: "x86_64" }').* }}
           echo "${files[@]}"
