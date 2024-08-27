@@ -40,7 +40,6 @@ jobs:
           for file in "${files[@]}"; do
             echo "$file" >> path.txt
           done
-           - name: create string
       - name: experiment
         run: |
             MY_STRING=$(cat << EOF
