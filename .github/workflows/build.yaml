@@ -36,8 +36,9 @@ jobs:
         id: get-artifact-str
         shell: bash
         run: |
+          # disable bash globbing
           set -f
-          artifact_globs=${{ join(fromJson('{ "wheel": "best*", tests: "random*" }').*) }}
+          artifact_globs=${{ join(fromJson('{ "wheel": "best*"}').*) }}
           echo "ARTIFACT_GLOB_STR<<EOF" >> $GITHUB_OUTPUT
           for glob in ${artifact_globs//,/ }; do echo $glob >> $GITHUB_OUTPUT; done
           echo "EOF" >> $GITHUB_OUTPUT
