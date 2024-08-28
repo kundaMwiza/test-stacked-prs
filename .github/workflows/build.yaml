@@ -48,8 +48,9 @@ jobs:
           name: test
           if-no-files-found: error
           overwrite: true
-          path: ${{ steps.get-artifact-str.outputs.ARTIFACT_GLOB_STR }}
-          # path: | ${{ format('\n{0}', join(fromJson('{ 32: "best_*", 64: "test_*" }').*, '\n')) }}
+          #path: ${{ steps.get-artifact-str.outputs.ARTIFACT_GLOB_STR }}
+          path: | ${{ format('\n{0}', join(fromJson('{ 32: "best_*", 64: "test_*" }').*, '
+          ')) }}
 
           #  *est_test.py
           #  test_match_case*
